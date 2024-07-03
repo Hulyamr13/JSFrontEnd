@@ -1,11 +1,12 @@
 function hashedWords(myString) {
     const regexp = /#([A-Za-z]+)/g;
-    const matches = myString.matchAll(regexp);
-
-    for (const match of matches) {
+    let match;
+    
+    while ((match = regexp.exec(myString)) !== null) {
         console.log(match[1]);
     }
 }
+
 
 // Example usage:
 hashedWords('Nowadays everyone uses # to tag a #special word in #socialMedia');
