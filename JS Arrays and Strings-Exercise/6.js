@@ -29,6 +29,20 @@ function hashedWords(myString) {
 }
 
 
+function modernTimes(inputString) {
+    const regex = /#[A-Za-z]+/gm; 
+    
+    inputString.split(/\s+/).forEach(word => {
+        const matches = word.match(regex);
+
+        if (matches) {
+            matches.forEach(match => {
+                console.log(match.substring(1));
+            });
+        }
+    });
+}
+
 
 // Example usage:
 hashedWords('Nowadays everyone uses # to tag a #special word in #socialMedia');
