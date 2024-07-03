@@ -8,6 +8,15 @@ function hashedWords(myString) {
 }
 
 
+function hashedWords(myString) {
+    myString.replace(/#([A-Za-z]+)/g, (match, group) => {
+        console.log(group);
+        return ''; 
+    });
+}
+
+
+
 // Example usage:
 hashedWords('Nowadays everyone uses # to tag a #special word in #socialMedia');
 // Expected Output:
