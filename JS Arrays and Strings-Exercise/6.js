@@ -1,7 +1,11 @@
 function hashedWords(myString) {
     const regexp = /#([A-Za-z]+)/g;
     let match;
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
     while ((match = regexp.exec(myString)) !== null) {
         console.log(match[1]);
     }
@@ -11,7 +15,11 @@ function hashedWords(myString) {
 function hashedWords(myString) {
     myString.replace(/#([A-Za-z]+)/g, (match, group) => {
         console.log(group);
+<<<<<<< Updated upstream
         return ''; 
+=======
+        return '';
+>>>>>>> Stashed changes
     });
 }
 
@@ -30,8 +38,13 @@ function hashedWords(myString) {
 
 
 function modernTimes(inputString) {
+<<<<<<< Updated upstream
     const regex = /#[A-Za-z]+/gm; 
     
+=======
+    const regex = /#[A-Za-z]+/gm;
+
+>>>>>>> Stashed changes
     inputString.split(/\s+/).forEach(word => {
         const matches = word.match(regex);
 
