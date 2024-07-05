@@ -1,11 +1,48 @@
 function hashedWords(myString) {
     const regexp = /#([A-Za-z]+)/g;
-    const matches = myString.matchAll(regexp);
-
-    for (const match of matches) {
+    let match;
+    
+    while ((match = regexp.exec(myString)) !== null) {
         console.log(match[1]);
     }
 }
+
+
+function hashedWords(myString) {
+    myString.replace(/#([A-Za-z]+)/g, (match, group) => {
+        console.log(group);
+        return ''; 
+    });
+}
+
+function hashedWords(myString) {
+    const words = myString.split(' ');
+
+    words.forEach(word => {
+        if (word.startsWith('#')) {
+            const cleanWord = word.slice(1); // премахваме '#'
+            if (/^[A-Za-z]+$/.test(cleanWord)) {
+                console.log(cleanWord);
+            }
+        }
+    });
+}
+
+
+function modernTimes(inputString) {
+    const regex = /#[A-Za-z]+/gm; 
+    
+    inputString.split(/\s+/).forEach(word => {
+        const matches = word.match(regex);
+
+        if (matches) {
+            matches.forEach(match => {
+                console.log(match.substring(1));
+            });
+        }
+    });
+}
+
 
 // Example usage:
 hashedWords('Nowadays everyone uses # to tag a #special word in #socialMedia');
