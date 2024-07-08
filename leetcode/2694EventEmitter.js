@@ -25,7 +25,6 @@ class EventEmitter {
         return [...callbacks].map(callback => callback(...args));
     }
 }
-
 /**
  * const emitter = new EventEmitter();
  *
