@@ -19,7 +19,6 @@ Array.prototype.snail = function(rowsCount, colsCount) {
 
   return arr;
 };
-
 /**
  * const arr = [1,2,3,4];
  * arr.snail(1,4); // [[1,2,3,4]]
