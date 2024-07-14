@@ -1,32 +1,24 @@
-function getFlightInfo(mainArray) {
-    const [array1, array2, array3] = mainArray;
-    let allFlights = {};
-    let status = 'Ready to fly';
-
-    // Populate allFlights from array1
-    for (let info1 of array1) {
-        let [number, destination] = info1.split(' ');
-        allFlights[number] = {
-            Destination: destination,
-            Status: status,
+function flightSchedule(info) {
+    const [flights, statusUpdates, [searchedStatus]] = info;
+    const flightInfo = flights.reduce((acc, flight) => {
+        const [flightNumber, ...destinationParts] = flight.split(' ');
+        acc[flightNumber] = {
+            Destination: destinationParts.join(' '),
+            Status: 'Ready to fly'
         };
-    }
+        return acc;
+    }, {});
 
-    // Update statuses from array2
-    for (let info2 of array2) {
-        let number = info2.split(' ')[0];
-        if (allFlights.hasOwnProperty(number)) {
-            allFlights[number].Status = 'Cancelled';
+    statusUpdates.forEach(update => {
+        const [flightNumber, status] = update.split(' ');
+        if (flightInfo[flightNumber]) {
+            flightInfo[flightNumber].Status = status;
         }
-    }
-
-    // Filter and print flights with the given status from array3
-    let filteredFlights = Object.entries(allFlights)
-        .filter(([, flight]) => flight.Status === array3[0]);
-
-    filteredFlights.forEach(([number, flight]) => {
-        console.log(`{ Destination: '${flight.Destination}', Status: '${flight.Status}' }`);
     });
+
+    Object.values(flightInfo)
+        .filter(flight => flight.Status === searchedStatus)
+        .forEach(flight => console.log(flight));
 }
 
 // Example usage:
