@@ -17,6 +17,25 @@ function catConstructor(cats) {
     }
 }
 
+
+function catConstructor(cats) {
+    class Cat {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        meow() {
+            console.log(`${this.name}, age ${this.age} says Meow`);
+        }
+    }
+
+    cats.forEach(cat => {
+        const [catName, catAge] = cat.split(' ');
+        new Cat(catName, catAge).meow();
+    });
+}
+
 catConstructor(['Mellow 2', 'Tom 5']);
 // Output:
 // Mellow, age 2 says Meow
