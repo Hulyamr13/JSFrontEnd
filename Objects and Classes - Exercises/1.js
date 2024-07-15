@@ -13,6 +13,14 @@ function printEmployees(inputArray) {
     }
 }
 
+
+function printEmployees(inputArray) {
+    inputArray.forEach(name => {
+        console.log(`Name: ${name} -- Personal Number: ${name.length}`);
+    });
+}
+
+
 printEmployees([
     'Silas Butler',
     'Adnaan Buckley',
