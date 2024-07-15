@@ -40,6 +40,42 @@ function storeCoursesAndStudents(inputArray) {
     });
 }
 
+
+function storeCoursesAndStudents(inputArray) {
+    const courses = {};
+
+    inputArray.forEach(input => {
+        if (input.includes(':')) {
+            const [courseName, capacityStr] = input.split(': ').map(str => str.trim());
+            const capacity = Number(capacityStr);
+
+            if (!courses[courseName]) {
+                courses[courseName] = { capacity, students: [] };
+            } else {
+                courses[courseName].capacity += capacity;
+            }
+        } else if (input.includes('joins')) {
+            const [username, credits, email, courseName] = input.match(/(.+)\[(\d+)\] with email (.+) joins (.+)/).slice(1);
+
+            if (courses[courseName] && courses[courseName].students.length < courses[courseName].capacity) {
+                courses[courseName].students.push({ username, email, credits: Number(credits) });
+            }
+        }
+    });
+
+    Object.entries(courses)
+        .sort(([, a], [, b]) => b.students.length - a.students.length)
+        .forEach(([courseName, { capacity, students }]) => {
+            console.log(`${courseName}: ${capacity - students.length} places left`);
+            students
+                .sort((a, b) => b.credits - a.credits)
+                .forEach(({ username, email, credits }) => {
+                    console.log(`--- ${credits}: ${username}, ${email}`);
+                });
+        });
+}
+
+
 // Example 1
 const input1 = [
     'JavaBasics: 2',
