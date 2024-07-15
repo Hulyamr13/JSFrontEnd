@@ -46,6 +46,37 @@ function storeBooks(input) {
     });
 }
 
+
+function storeBooks(input) {
+    const shelves = input.reduce((acc, line) => {
+        if (line.includes('->')) {
+            const [shelfId, shelfGenre] = line.split(' -> ');
+            if (!acc[shelfId]) {
+                acc[shelfId] = { genre: shelfGenre, books: [] };
+            }
+        } else if (line.includes(':')) {
+            const [bookInfo, bookGenre] = line.split(', ');
+            const [bookTitle, bookAuthor] = bookInfo.split(': ');
+
+            const shelf = Object.values(acc).find(s => s.genre === bookGenre);
+            if (shelf) {
+                shelf.books.push({ title: bookTitle, author: bookAuthor });
+            }
+        }
+        return acc;
+    }, {});
+
+    Object.entries(shelves)
+        .sort(([, a], [, b]) => b.books.length - a.books.length)
+        .forEach(([shelfId, shelfDetails]) => {
+            console.log(`${shelfId} ${shelfDetails.genre}: ${shelfDetails.books.length}`);
+            shelfDetails.books
+                .sort((a, b) => a.title.localeCompare(b.title))
+                .forEach(book => console.log(`--> ${book.title}: ${book.author}`));
+        });
+}
+
+
 // Example 1
 const input1 = [
     '1 -> history',
