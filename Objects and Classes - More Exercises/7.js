@@ -19,6 +19,23 @@ function storeSequences(inputArray) {
     });
 }
 
+function storeSequences(inputArray) {
+    const uniqueArrays = new Map();
+
+    for (const element of inputArray) {
+        const current = JSON.parse(element);
+        const sorted = current.sort((a, b) => b - a);
+        const key = sorted.join(',');
+        uniqueArrays.set(key, sorted);
+    }
+
+    const sortedUniqueArrays = Array.from(uniqueArrays.values()).sort((a, b) => a.length - b.length);
+
+    sortedUniqueArrays.forEach(array => {
+        console.log(`[${array.join(', ')}]`);
+    });
+}
+
 
 // Test cases
 let input1 = [
