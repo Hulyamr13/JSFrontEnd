@@ -15,6 +15,27 @@ class Vehicle {
     }
 }
 
+class Vehicle {
+    constructor(type, model, parts, fuel) {
+        this.type = type;
+        this.model = model;
+        this.parts = {
+            engine: parts.engine,
+            power: parts.power,
+            get quality() {
+                return this.engine * this.power;
+            }
+        };
+        this.fuel = fuel;
+    }
+
+    drive(fuelLoss) {
+        this.fuel -= fuelLoss;
+    }
+}
+
+
+
 // Example 1
 let parts1 = { engine: 6, power: 100 };
 let vehicle1 = new Vehicle('a', 'b', parts1, 200);
