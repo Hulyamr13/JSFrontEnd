@@ -39,6 +39,40 @@ function manageBrowserHistory(browserObj, actions) {
     console.log(`Browser Logs: ${browserLogs.join(", ")}`);
 }
 
+
+function manageBrowserHistory(browserObj, actions) {
+    const { "Browser Name": browserName, "Open Tabs": openTabs, "Recently Closed": recentlyClosed, "Browser Logs": browserLogs } = browserObj;
+
+    actions.forEach(action => {
+        if (action === "Clear History and Cache") {
+            openTabs.length = 0;
+            recentlyClosed.length = 0;
+            browserLogs.length = 0;
+        } else {
+            const [command, ...siteParts] = action.split(" ");
+            const site = siteParts.join(" ");
+
+            if (command === "Open") {
+                if (!openTabs.includes(site)) openTabs.push(site);
+                browserLogs.push(`Open ${site}`);
+            } else if (command === "Close") {
+                const index = openTabs.indexOf(site);
+                if (index !== -1) {
+                    openTabs.splice(index, 1);
+                    recentlyClosed.push(site);
+                    browserLogs.push(`Close ${site}`);
+                }
+            }
+        }
+    });
+
+    console.log(browserName);
+    console.log(`Open Tabs: ${openTabs.join(", ")}`);
+    console.log(`Recently Closed: ${recentlyClosed.join(", ")}`);
+    console.log(`Browser Logs: ${browserLogs.join(", ")}`);
+}
+
+
 // Test cases
 let browserObj1 = {
     "Browser Name": "Google Chrome",
