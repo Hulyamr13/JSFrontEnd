@@ -24,6 +24,37 @@ class Laptop {
     }
 }
 
+
+class Laptop {
+    constructor(info, quality) {
+        this.info = info;
+        this.isOn = false;
+        this.quality = quality;
+    }
+
+    turnOn() {
+        this.isOn = true;
+        this._decreaseQuality();
+    }
+
+    turnOff() {
+        this.isOn = false;
+        this._decreaseQuality();
+    }
+
+    showInfo() {
+        return JSON.stringify(this.info);
+    }
+
+    _decreaseQuality() {
+        this.quality -= 1;
+    }
+
+    get price() {
+        return 800 - (this.info.age * 2) + (this.quality * 0.5);
+    }
+}
+
 // Example 1
 let info1 = { producer: "Dell", age: 2, brand: "XPS" };
 let laptop1 = new Laptop(info1, 10);
