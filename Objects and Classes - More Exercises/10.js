@@ -39,6 +39,37 @@ function storeComments(inputArray) {
     });
 }
 
+
+
+function storeComments(inputArray) {
+    const users = new Set();
+    const articles = {};
+
+    inputArray.forEach(line => {
+        if (line.startsWith('user ')) {
+            users.add(line.slice(5));
+        } else if (line.startsWith('article ')) {
+            articles[line.slice(8)] = [];
+        } else {
+            const [_, username, articleName, commentTitle, commentContent] = line.match(/^(.+?) posts on (.+?): (.+), (.+)$/) || [];
+            if (username && users.has(username) && articles[articleName]) {
+                articles[articleName].push({ username, title: commentTitle, content: commentContent });
+            }
+        }
+    });
+
+    Object.entries(articles)
+        .sort((a, b) => b[1].length - a[1].length)
+        .forEach(([articleName, comments]) => {
+            console.log(`Comments on ${articleName}`);
+            comments
+                .sort((a, b) => a.username.localeCompare(b.username))
+                .forEach(comment => console.log(`--- From user ${comment.username}: ${comment.title} - ${comment.content}`));
+        });
+}
+
+
+
 const input1 = [
     'user aUser123',
     'someUser posts on someArticle: NoTitle, stupidComment',
