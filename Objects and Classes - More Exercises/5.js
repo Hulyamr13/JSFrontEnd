@@ -1,38 +1,4 @@
 function schoolRegister(students) {
-    let register = {};
-
-    students.forEach(student => {
-        let [, name, gradeStr, scoreStr] = student.match(/Student name: (\w+), Grade: (\d+), Graduated with an average score: (\d+\.\d+)/);
-        let grade = parseInt(gradeStr);
-        let score = parseFloat(scoreStr);
-
-        if (score >= 3) {
-            let nextGrade = grade + 1;
-            if (!register[nextGrade]) {
-                register[nextGrade] = {
-                    students: [],
-                    totalScore: 0,
-                    count: 0
-                };
-            }
-            register[nextGrade].students.push(name);
-            register[nextGrade].totalScore += score;
-            register[nextGrade].count++;
-        }
-    });
-
-    let sortedGrades = Object.keys(register).sort((a, b) => a - b);
-
-    sortedGrades.forEach(grade => {
-        let avgScore = (register[grade].totalScore / register[grade].count).toFixed(2);
-        console.log(`${grade} Grade`);
-        console.log(`List of students: ${register[grade].students.join(', ')}`);
-        console.log(`Average annual score from last year: ${avgScore}`);
-        console.log('');
-    });
-}
-
-function schoolRegister(students) {
     const register = {};
 
     students.forEach(student => {
