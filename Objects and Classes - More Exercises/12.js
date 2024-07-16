@@ -3,49 +3,6 @@ function storeCoursesAndStudents(inputArray) {
 
     inputArray.forEach(input => {
         if (input.includes(':')) {
-            const [courseInfo, capacityStr] = input.split(': ');
-            const courseName = courseInfo.trim();
-            const capacity = Number(capacityStr);
-
-            if (!courses.hasOwnProperty(courseName)) {
-                courses[courseName] = { capacity, students: [] };
-            } else {
-                courses[courseName].capacity += capacity;
-            }
-        } else if (input.includes('joins')) {
-            const regex = /(.+)\[(\d+)\] with email (.+) joins (.+)/;
-            const [, username, creditsStr, email, courseName] = input.match(regex);
-            const credits = Number(creditsStr);
-
-            if (courses.hasOwnProperty(courseName)) {
-                const { capacity, students } = courses[courseName];
-                if (students.length < capacity) {
-                    students.push({ username, email, credits });
-                }
-            }
-        }
-    });
-
-    const sortedCourses = Object.entries(courses)
-        .sort(([, courseA], [, courseB]) => courseB.students.length - courseA.students.length);
-
-    sortedCourses.forEach(([courseName, { capacity, students }]) => {
-        const placesLeft = Math.max(0, capacity - students.length);
-        console.log(`${courseName}: ${placesLeft} places left`);
-
-        students.sort((a, b) => b.credits - a.credits)
-            .forEach(student => {
-                console.log(`--- ${student.credits}: ${student.username}, ${student.email}`);
-            });
-    });
-}
-
-
-function storeCoursesAndStudents(inputArray) {
-    const courses = {};
-
-    inputArray.forEach(input => {
-        if (input.includes(':')) {
             const [courseName, capacityStr] = input.split(': ').map(str => str.trim());
             const capacity = Number(capacityStr);
 
