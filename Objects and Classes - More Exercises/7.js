@@ -1,25 +1,4 @@
 function storeSequences(inputArray) {
-    const uniqueArrays = new Set();
-
-    for (const element of inputArray) {
-        const current = JSON.parse(element);
-        const sorted = current.sort((a, b) => b - a);
-        uniqueArrays.add(JSON.stringify(sorted));
-    }
-
-    const sortedUniqueArrays = Array.from(uniqueArrays).sort((a, b) => {
-        const arrayA = JSON.parse(a);
-        const arrayB = JSON.parse(b);
-        return arrayA.length - arrayB.length;
-    });
-
-    sortedUniqueArrays.forEach(arrayString => {
-        const array = JSON.parse(arrayString);
-        console.log(`[${array.join(', ')}]`);
-    });
-}
-
-function storeSequences(inputArray) {
     const uniqueArrays = new Map();
 
     for (const element of inputArray) {
