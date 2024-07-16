@@ -1,25 +1,5 @@
 function findOddOccurrences(inputString) {
     const elements = new Map();
-    const inputArray = inputString.trim().split(/\s+/);
-
-    for (let item of inputArray) {
-        let element = item.toLowerCase().trim();
-        elements.set(element, (elements.get(element) || 0) + 1);
-    }
-
-    const oddOccurrences = [];
-    for (let [element, count] of elements) {
-        if (count % 2 === 1) {
-            oddOccurrences.push(element);
-        }
-    }
-
-    console.log(oddOccurrences.join(' '));
-}
-
-
-function findOddOccurrences(inputString) {
-    const elements = new Map();
 
     const inputArray = inputString.trim().split(/\s+/);
 
