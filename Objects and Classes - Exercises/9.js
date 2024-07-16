@@ -18,26 +18,6 @@ function makeDictionary(input) {
 }
 
 
-function makeDictionary(input) {
-    let dictionary = {};
-
-    input.forEach(jsonString => {
-        let obj = JSON.parse(jsonString);
-        let term = Object.keys(obj)[0];
-        let definition = obj[term];
-
-        dictionary[term] = definition;
-    });
-
-    let sortedTerms = Object.keys(dictionary).sort();
-
-    sortedTerms.forEach(term => {
-        let definition = dictionary[term];
-        console.log(`Term: ${term} => Definition: ${definition}`);
-    });
-}
-
-
 // Test cases
 let input1 = [
     '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
