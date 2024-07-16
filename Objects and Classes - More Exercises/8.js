@@ -1,34 +1,4 @@
 function storeCarsInGarages(inputArray) {
-    let garages = {};
-
-    inputArray.forEach(input => {
-        let [garageNumber, carInfo] = input.split(' - ');
-        garageNumber = parseInt(garageNumber);
-
-        if (!garages.hasOwnProperty(garageNumber)) {
-            garages[garageNumber] = [];
-        }
-
-        let formattedCarInfo = carInfo.split(', ')
-            .map(pair => {
-                let [key, value] = pair.split(': ');
-                return `${key.trim()} - ${value.trim()}`;
-            })
-            .join(', ');
-
-        garages[garageNumber].push(formattedCarInfo);
-    });
-
-    Object.keys(garages).forEach(garageNumber => {
-        console.log(`Garage № ${garageNumber}`);
-        garages[garageNumber].forEach(car => {
-            console.log(`--- ${car}`);
-        });
-    });
-}
-
-
-function storeCarsInGarages(inputArray) {
     const garages = {};
 
     inputArray.forEach(input => {
