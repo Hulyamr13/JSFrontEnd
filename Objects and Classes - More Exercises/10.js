@@ -1,47 +1,4 @@
 function storeComments(inputArray) {
-    const users = {};
-    const articles = {};
-
-    for (const line of inputArray) {
-        if (line.startsWith('user')) {
-            const username = line.replace('user ', '');
-            users[username] = true;
-        } else if (line.startsWith('article')) {
-            const articleName = line.replace('article ', '');
-            articles[articleName] = [];
-        } else {
-            const match = line.match(/^(.+?) posts on (.+?): (.+), (.+)$/);
-            if (match) {
-                const username = match[1];
-                const articleName = match[2];
-                const commentTitle = match[3];
-                const commentContent = match[4];
-
-                if (users.hasOwnProperty(username) && articles.hasOwnProperty(articleName)) {
-                    articles[articleName].push({
-                        username: username,
-                        title: commentTitle,
-                        content: commentContent
-                    });
-                }
-            }
-        }
-    }
-
-    const sortedArticles = Object.entries(articles).sort((a, b) => b[1].length - a[1].length);
-
-    sortedArticles.forEach(([articleName, comments]) => {
-        console.log(`Comments on ${articleName}`);
-        comments.sort((a, b) => a.username.localeCompare(b.username)); // Sort comments by username
-        comments.forEach(comment => {
-            console.log(`--- From user ${comment.username}: ${comment.title} - ${comment.content}`);
-        });
-    });
-}
-
-
-
-function storeComments(inputArray) {
     const users = new Set();
     const articles = {};
 
