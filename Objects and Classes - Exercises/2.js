@@ -1,21 +1,4 @@
 function processTowns(input) {
-    for (let row of input) {
-        let [town, latitudeStr, longitudeStr] = row.split(' | ');
-        let latitude = Number(latitudeStr).toFixed(2);
-        let longitude = Number(longitudeStr).toFixed(2);
-
-        let townObj = {
-            town: town,
-            latitude: latitude,
-            longitude: longitude
-        };
-
-        console.log(townObj);
-    }
-}
-
-
-function processTowns(input) {
     input.forEach(row => {
         let [town, latitudeStr, longitudeStr] = row.split(' | ');
         let latitude = Number(latitudeStr).toFixed(2);
