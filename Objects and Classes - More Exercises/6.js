@@ -1,46 +1,4 @@
 function manageBrowserHistory(browserObj, actions) {
-    let {
-        "Browser Name": browserName,
-        "Open Tabs": openTabs,
-        "Recently Closed": recentlyClosed,
-        "Browser Logs": browserLogs
-    } = browserObj;
-
-    actions.forEach(action => {
-        if (action === "Clear History and Cache") {
-            openTabs = [];
-            recentlyClosed = [];
-            browserLogs = [];
-            return;
-        }
-
-        let actionParts = action.split(" ");
-        let actionType = actionParts[0];
-        let site = actionParts.slice(1).join(" ");
-
-        if (actionType === "Open") {
-            if (!openTabs.includes(site)) {
-                openTabs.push(site);
-            }
-            browserLogs.push(`Open ${site}`);
-        } else if (actionType === "Close") {
-            if (openTabs.includes(site)) {
-                let index = openTabs.indexOf(site);
-                openTabs.splice(index, 1);
-                recentlyClosed.push(site);
-                browserLogs.push(`Close ${site}`);
-            }
-        }
-    });
-
-    console.log(browserName);
-    console.log(`Open Tabs: ${openTabs.join(", ")}`);
-    console.log(`Recently Closed: ${recentlyClosed.join(", ")}`);
-    console.log(`Browser Logs: ${browserLogs.join(", ")}`);
-}
-
-
-function manageBrowserHistory(browserObj, actions) {
     const { "Browser Name": browserName, "Open Tabs": openTabs, "Recently Closed": recentlyClosed, "Browser Logs": browserLogs } = browserObj;
 
     actions.forEach(action => {
