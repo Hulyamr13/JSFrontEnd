@@ -26,6 +26,36 @@ function storeMovies(input) {
     }
 }
 
+
+function storeMovies(input) {
+    let movies = [];
+
+    for (let command of input) {
+        if (command.startsWith('addMovie')) {
+            let movieName = command.substring(9);
+            movies.push({ name: movieName });
+        } else if (command.includes('directedBy')) {
+            let [movieName, director] = command.split(' directedBy ');
+            let movie = movies.find(m => m.name === movieName);
+            if (movie) {
+                movie.director = director;
+            }
+        } else if (command.includes('onDate')) {
+            let [movieName, date] = command.split(' onDate ');
+            let movie = movies.find(m => m.name === movieName);
+            if (movie) {
+                movie.date = date;
+            }
+        }
+    }
+
+    let filteredMovies = movies.filter(m => m.name && m.director && m.date);
+    for (let movie of filteredMovies) {
+        console.log(JSON.stringify(movie));
+    }
+}
+
+
 // Test cases
 storeMovies([
     'addMovie Fast and Furious',
