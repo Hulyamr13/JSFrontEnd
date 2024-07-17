@@ -21,6 +21,25 @@ function storeProvision(currentStock, deliveries) {
 }
 
 
+function storeProvision(currentStock, deliveries) {
+    let stock = {};
+
+
+    [currentStock, deliveries].forEach(items => {
+        for (let i = 0; i < items.length; i += 2) {
+            let product = items[i];
+            let quantity = Number(items[i + 1]);
+
+            stock[product] = (stock[product] || 0) + quantity;
+        }
+    });
+
+
+    for (let product in stock) {
+        console.log(`${product} -> ${stock[product]}`);
+    }
+}
+
 
 // Test cases
 storeProvision(
