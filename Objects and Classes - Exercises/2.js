@@ -14,6 +14,24 @@ function processTowns(input) {
     });
 }
 
+function processTowns(input) {
+    input.reduce((accumulator, row) => {
+        let [town, latitudeStr, longitudeStr] = row.split(' | ');
+        let latitude = Number(latitudeStr).toFixed(2);
+        let longitude = Number(longitudeStr).toFixed(2);
+
+        let townObj = {
+            town,
+            latitude,
+            longitude
+        };
+
+        console.log(townObj);
+        return accumulator;
+    }, []);
+}
+
+
 // Test cases
 processTowns([
     'Sofia | 42.696552 | 23.32601',
