@@ -1,8 +1,8 @@
 function attachEvents() {
     const baseURL = 'http://localhost:3030/jsonstore/tasks';
 
-    const taskTitle = document.getElementById('title');
-    const taskDescription = document.getElementById('description');
+    const taskTitleElement = document.getElementById('title');
+    const taskDescriptionElement = document.getElementById('description');
 
     const taskLists = {
         'ToDo': document.querySelector('#todo-section .task-list'),
@@ -24,26 +24,27 @@ function attachEvents() {
         'Code Review': 'Done',
     };
 
-    const loadBoardBtn = document.getElementById('load-board-btn');
-    const addTaskBtn = document.getElementById('create-task-btn');
+    const loadBoardButtonElement = document.getElementById('load-board-btn');
+    const addTaskButtonElement = document.getElementById('create-task-btn');
 
-    loadBoardBtn.addEventListener('click', loadTasks);
-    addTaskBtn.addEventListener('click', addTask);
+    loadBoardButtonElement.addEventListener('click', loadTasksHandler);
+    addTaskButtonElement.addEventListener('click', createTaskHandler);
 
-    function loadTasks() {
+    function loadTasksHandler() {
         clearLists();
 
         fetch(baseURL)
-            .then(response => response.json())
-            .then(data => {
+            .then((response) => response.json())
+            .then((data) => {
                 Object.values(data).forEach(task => {
-                    taskLists[task.status].appendChild(createTask(task));
+                    taskLists[task.status].appendChild(createTaskElement(task));
                 });
-            });
+            })
+            .catch((error) => console.error('Error:', error));
     }
 
-    function addTask() {
-        const newTask = getInputs();
+    function createTaskHandler() {
+        const newTask = getTaskInputs();
 
         if (newTask) {
             fetch(baseURL, {
@@ -57,60 +58,46 @@ function attachEvents() {
                 if (!response.ok) {
                     throw new Error('Failed to add task');
                 }
-                clearInputs();
-                return loadTasks();
+                clearTaskInputs();
+                loadTasksHandler();
             })
             .catch(error => console.error('Error:', error));
         }
     }
 
-    function moveTask(task) {
+    function moveTaskHandler(task) {
         task.status = taskNextStatus[task.status];
-        const taskId = task._id;
 
-        fetch(`${baseURL}/${taskId}`, {
+        fetch(`${baseURL}/${task._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                status: task.status
-            })
+            body: JSON.stringify({ status: task.status }),
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to update task');
             }
-            return loadTasks();
+            loadTasksHandler();
         })
         .catch(error => console.error('Error:', error));
     }
 
-    function deleteTask(task) {
-        const taskId = task._id;
-
-        fetch(`${baseURL}/${taskId}`, {
-            method: 'DELETE'
+    function deleteTaskHandler(task) {
+        fetch(`${baseURL}/${task._id}`, {
+            method: 'DELETE',
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to delete task');
             }
-            return loadTasks();
+            loadTasksHandler();
         })
         .catch(error => console.error('Error:', error));
     }
 
-    function clearLists() {
-        Object.values(taskLists).forEach(list => list.innerHTML = '');
-    }
-
-    function clearInputs() {
-        taskTitle.value = '';
-        taskDescription.value = '';
-    }
-
-    function createTask(task) {
+    function createTaskElement(task) {
         const taskLi = document.createElement('li');
         taskLi.className = 'task';
 
@@ -128,24 +115,35 @@ function attachEvents() {
 
         taskButton.addEventListener('click', () => {
             if (task.status !== 'Done') {
-                moveTask(task);
+                moveTaskHandler(task);
             } else {
-                deleteTask(task);
+                deleteTaskHandler(task);
             }
         });
 
         return taskLi;
     }
 
-    function getInputs() {
-        if (taskTitle.value !== '' && taskDescription.value !== '') {
+    function getTaskInputs() {
+        if (taskTitleElement.value !== '' && taskDescriptionElement.value !== '') {
             return {
-                title: taskTitle.value,
-                description: taskDescription.value,
+                title: taskTitleElement.value,
+                description: taskDescriptionElement.value,
                 status: 'ToDo',
             };
         }
     }
+
+    function clearTaskInputs() {
+        taskTitleElement.value = '';
+        taskDescriptionElement.value = '';
+    }
+
+    function clearLists() {
+        Object.values(taskLists).forEach(list => list.innerHTML = '');
+    }
+
+    loadTasksHandler();
 }
 
 attachEvents();
