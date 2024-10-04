@@ -1,3 +1,7 @@
+Angular (Basic)
+It covers topics like MVC Frameworks, Components (Angular, Dynamic, Styling), TypeScript, Two Way Binding and Form Validation
+
+
 # Temperature Converter
 
 ## Environment 
