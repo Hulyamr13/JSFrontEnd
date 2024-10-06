@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<testsuite name="HeadlessChrome 78.0.3904 (Linux 0.0.0)" package="unit" timestamp="2024-10-04T17:10:40" id="0" hostname="bbda2e1ff10b" tests="9" errors="0" failures="3" time="0.308">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/78.0.3904.108 Safari/537.36"/>
+  </properties>
+  <testcase name="LengthConverter Typing value in Kilometres field gets correct Metres value" time="0.084" classname=".LengthConverter"/>
+  <testcase name="LengthConverter Typing value in Metres field gets correct Kilometres value" time="0.032" classname=".LengthConverter"/>
+  <testcase name="LengthConverter Typing value in Kilometres field gets correct Centimetres value" time="0.034" classname=".LengthConverter"/>
+  <testcase name="LengthConverter Typing value in Metres field gets correct Centimetres value" time="0.042" classname=".LengthConverter"/>
+  <testcase name="LengthConverter Typing value in Metres field gets correct Metres value" time="0.043" classname=".LengthConverter"/>
+  <testcase name="LengthConverter Perform series of operations" time="0.02" classname=".LengthConverter">
+    <failure type="">Error: Expected 500 to equal 50000.
+    at &lt;Jasmine&gt;
+    at http://localhost:9876/_karma_webpack_/src/app/lengthConverter/lengthConverter.component.spec.ts:139:34
+    at &lt;Jasmine&gt;
+    at fulfilled (http://localhost:9876/_karma_webpack_/node_modules/tslib/tslib.es6.js:71:42)
+</failure>
+    <failure type="">Error: Expected 500 to equal 0.5.
+    at &lt;Jasmine&gt;
+    at http://localhost:9876/_karma_webpack_/src/app/lengthConverter/lengthConverter.component.spec.ts:143:34
+    at &lt;Jasmine&gt;
+    at fulfilled (http://localhost:9876/_karma_webpack_/node_modules/tslib/tslib.es6.js:71:42)
+</failure>
+  </testcase>
+  <testcase name="LengthConverter If input is not empty and dropdown is changed, input field should reflect new value" time="0.014" classname=".LengthConverter">
+    <failure type="">Error: Expected 500 to equal 0.5.
+    at &lt;Jasmine&gt;
+    at http://localhost:9876/_karma_webpack_/src/app/lengthConverter/lengthConverter.component.spec.ts:124:34
+    at &lt;Jasmine&gt;
+    at fulfilled (http://localhost:9876/_karma_webpack_/node_modules/tslib/tslib.es6.js:71:42)
+</failure>
+  </testcase>
+  <testcase name="LengthConverter initial UI is rendered as exptected" time="0.014" classname=".LengthConverter">
+    <failure type="">Error: Expected 'Kilometre' to be 'Metre'.
+    at &lt;Jasmine&gt;
+    at http://localhost:9876/_karma_webpack_/src/app/lengthConverter/lengthConverter.component.spec.ts:73:52
+    at &lt;Jasmine&gt;
+    at fulfilled (http://localhost:9876/_karma_webpack_/node_modules/tslib/tslib.es6.js:71:42)
+</failure>
+  </testcase>
+  <testcase name="LengthConverter Typing value in Kilometres field gets correct Kilometres value" time="0.025" classname=".LengthConverter"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
