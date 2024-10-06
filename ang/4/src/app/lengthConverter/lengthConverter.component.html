@@ -1,0 +1,32 @@
+<div class="layout-row align-items-center justify-content-center mt-50">
+  <!-- Input set 1 -->
+  <section class="layout-column align-items-center justify-content-between">
+    <span class="input layout-row">
+      <input type="number" class="large"
+             [value]="input1Value !== null ? input1Value : ''"
+             (input)="onInput1Change($event.target.value)"
+             data-test-id="app-input1"/>
+      <label class="suffix" data-test-id="app-label1">{{ lengthOptions[unit1].unit }}</label>
+    </span>
+    <select [value]="unit1" (change)="onSelect1Change($event.target.value)" data-test-id="app-select1">
+      <option *ngFor="let option of lengthOptions" [value]="option.id">{{ option.label }}</option>
+    </select>
+  </section>
+
+  <!-- Arrow indicating conversion -->
+  <label>⇋</label>
+
+  <!-- Input set 2 -->
+  <section class="layout-column align-items-center justify-content-between">
+    <span class="input layout-row">
+      <input type="number" class="large"
+             [value]="input2Value !== null ? input2Value : ''"
+             (input)="onInput2Change($event.target.value)"
+             data-test-id="app-input2"/>
+      <label class="suffix" data-test-id="app-label2">{{ lengthOptions[unit2].unit }}</label>
+    </span>
+    <select [value]="unit2" (change)="onSelect2Change($event.target.value)" data-test-id="app-select2">
+      <option *ngFor="let option of lengthOptions" [value]="option.id">{{ option.label }}</option>
+    </select>
+  </section>
+</div>
